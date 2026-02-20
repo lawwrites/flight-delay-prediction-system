@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  lax_app:
+    image: lax_app:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: lax_container
+    ports:
+      - "8000:8000"
+    environment:
+      MODEL_PATH: /app/src/model/finalized_model.pkl
+      ENCODINGS_PATH: /app/src/model/airport_encodings.json
+    volumes:
+      - .:/app   # optional: hot-reload local files into container
+    command: >
+      uvicorn src.app.main:app
+      --host 0.0.0.0
+      --port 8000

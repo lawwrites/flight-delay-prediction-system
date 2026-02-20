@@ -1,0 +1,5 @@
+16:51:48 INFO Flight Departure Delays Polynomial Regression Model Log
+16:51:48 DEBUG Starting new HTTPS connection (1): config.mlflow-telemetry.io:443
+16:51:48 DEBUG https://config.mlflow-telemetry.io:443 "GET /3.2.0.json HTTP/11" 200 215
+16:51:48 DEBUG Starting new HTTPS connection (1): api.mlflow-telemetry.io:443
+16:51:48 DEBUG https://api.mlflow-telemetry.io:443 "POST /log HTTP/11" 200 30

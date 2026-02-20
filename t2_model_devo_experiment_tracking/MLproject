@@ -1,0 +1,31 @@
+name: LAX Destinations Training Data
+
+conda_env: pipeline_env.yaml
+
+
+entry_points:
+  prepare:
+    parameters:
+      raw_csv: {type: str, default: 'backup/T_ONTIME_REPORTING.csv'}
+      cleaned_csv: {type: str, default: 'clean_data.csv'}
+    command: >
+      python src/step_b_format_data.py
+      && python src/step_b_import_data.py
+      && python src/step_c_filter_columns.py
+
+  train:
+    parameters:
+      cleaned_csv: {type: str, default: 'cleaned_data.csv'}
+      config: {type: str, default: 'pipeline_env.yaml'}
+      num_alphas: {type: float, default: 20.0}
+      degrees: {type: int, default: 2}
+    command: "python poly_regressor_Python_4.0.0.py"
+
+  all:
+    parameters:
+      raw_csv: {type: str, default: 'data/T_ONTIME_REPORTING.csv'}
+      cleaned_csv: {type: str, default: 'clean_data.csv'}
+      config: {type: str, default: 'pipeline_env.yaml'}
+      num_alphas: {type: int, default: 20}
+      degrees: {type: int, default: 2}
+    command: "python poly_regressor_Python_4.0.0.py --degree {degrees} --num_alphas {num_alphas}"
